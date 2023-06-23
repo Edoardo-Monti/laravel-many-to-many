@@ -11,9 +11,15 @@
             <p>{{$singoloPost->type->name}}</p>
         </div>
         @endif
+
+        @if( $singoloPost->technologies )
+        @foreach ( $singoloPost->technologies as $elem )
+            <div> {{ $elem->name }} </div>
+        @endforeach
+        @endif
         <a href="{{route('admin.posts.edit', $singoloPost)}}" class="btn btn-primary">Modifica</a>
 
-        
+
     </div>
 </div>
 
