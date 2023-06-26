@@ -37,6 +37,23 @@
             </select>
         </div>
 
+        <div class="form-group mt-3">
+            @foreach($technologies as $elem)
+              <div class="form-check">
+                @if($errors->any())
+                    <input class="form-check-input" type="checkbox" value="{{$elem->id}}" id="checkbox{{$elem->id}}" name="technologies[]" {{in_array($elem->id, old('technologies', [])) ? 'checked' : ''}}>
+                    
+                @else
+                    <input class="form-check-input" type="checkbox" value="{{$elem->id}}" id="checkbox{{$elem->id}}" name="technologies[]" {{($post->technologies->contains($elem))? 'checked' : ''}}>
+                    
+                @endif
+                <label class="form-check-label" for="checkbox{{$elem->id}}">
+                     {{$elem->name}}
+                </label>
+              </div>
+            @endforeach
+        </div>
+
         <button type="submit" class="btn btn-primary mt-2">Inserisci modifiche</button>
 
     </form>
