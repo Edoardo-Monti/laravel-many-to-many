@@ -29,6 +29,17 @@
             @enderror
         </div>
 
+        <div class="form-group mt-3">
+            @foreach($technologies as $elem)
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{$elem->id}}" id="checkbox{{$elem->id}}" name="technologies[]">
+                <label class="form-check-label" for="checkbox{{$elem->id}}">
+                     {{$elem->name}}
+                </label>
+              </div>
+            @endforeach
+        </div>
+
         
     
         <button type="submit" class="btn btn-primary">Crea Fumetto</button>

@@ -7,16 +7,19 @@
         <h5 class="card-title">{{ $singoloPost->title }}</h5>
         <p class="card-text">{{$singoloPost->description}}</p>
         @if ($singoloPost->type)
+        <div class="text-warning">Tipologia:</div>
         <div>
             <p>{{$singoloPost->type->name}}</p>
         </div>
         @endif
 
         @if( $singoloPost->technologies )
+        <div class="text-warning">Utilizzo di:</div>
         @foreach ( $singoloPost->technologies as $elem )
-            <div> {{ $elem->name }} </div>
+        <div>{{ $elem->name }} </div>
         @endforeach
         @endif
+
         <a href="{{route('admin.posts.edit', $singoloPost)}}" class="btn btn-primary">Modifica</a>
 
 

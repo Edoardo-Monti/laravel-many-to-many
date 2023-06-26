@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Post;
 use Illuminate\Http\Request;
 use App\Models\Admin\Type;
+use App\Models\Admin\Technology;
 
 class PostController extends Controller
 {
@@ -29,7 +30,10 @@ class PostController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.posts.create', compact('types'));
+
+        $technologies = Technology::all();
+
+        return view('admin.posts.create', compact('types', 'technologies'));
     }
 
     /**
@@ -46,7 +50,8 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'description' => 'required|min:10',
                 'slug' => 'required',
-                'type' => 'nullable|exists:types,id'
+                'type' => 'nullable|exists:types,id',
+                'technologies' => 'nullable|exists:technologies,id',
                 
             ],
             [
@@ -65,6 +70,11 @@ class PostController extends Controller
         $newPost->fill($form_data);
 
         $newPost->save();
+
+        if ($request->has('technologies')) {
+            $newPost->technologies()->attach($request->technologies);
+        }
+
         return redirect()->route( 'admin.posts.index');
     }
 
