@@ -7,7 +7,7 @@
         @foreach ($posts as $elem)
         <a href="{{ route('admin.posts.show',$elem)}}">
             <div class="card mx-auto" style="width: 18rem;">
-                <img src="" class="card-img-top" alt="">
+                <img src="{{asset('storage/' . $elem->image)}}" class="card-img-top" alt="foto">
                 <div class="card-body">
                     <h5 class="card-title">{{$elem->title}}</h5>
                     <p class="card-text">{{$elem->description}}</p>

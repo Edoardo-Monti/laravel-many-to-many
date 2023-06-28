@@ -7,6 +7,7 @@ use App\Models\Admin\Post;
 use Illuminate\Http\Request;
 use App\Models\Admin\Type;
 use App\Models\Admin\Technology;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -65,6 +66,13 @@ class PostController extends Controller
         );
 
         $form_data = $request->all();
+
+        //inserimento img
+        if( $request ->hasFile('image')){
+            //public folder esiste ,post_image,cartella che creo 
+            $path = Storage::disk('public')->put('post_images', $request->image);
+            $form_data['image'] = $path;
+        }
 
         $newPost = new Post();
         $newPost->fill($form_data);
@@ -132,6 +140,16 @@ class PostController extends Controller
 
         $form_data = $request->all();
 
+        if( $request ->hasFile('image')){
+            
+            if( $post->image) {
+                Storage::delete( $post->image);
+                 }
+            //public folder esiste ,post_image,cartella che creo 
+            $path = Storage::disk('public')->put('post_images', $request->image);
+            $form_data['image'] = $path;
+        };
+
         $post->update($form_data);
 
         if($request->has('technologies')){
@@ -149,6 +167,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if( $post->image) {
+            Storage::delete($post->image);
+             }
+
         $post->technologies()->sync([]);
         $post->delete();
         

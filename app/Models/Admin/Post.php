@@ -14,6 +14,7 @@ class Post extends Model
         "title",
         "description",
         "slug",
+        "image",
         "type_id"
     ];
 

@@ -4,6 +4,7 @@
 <h1 class="text-center p-4">Singolo Post</h1>
 <div class="card mx-auto" style="width: 18rem;">
     <div class="card-body">
+        <img src="{{asset('storage/' . $singoloPost->image)}}" class="card-img-top" alt="foto">
         <h5 class="card-title">{{ $singoloPost->title }}</h5>
         <p class="card-text">{{$singoloPost->description}}</p>
         @if ($singoloPost->type)

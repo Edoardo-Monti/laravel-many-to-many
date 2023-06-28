@@ -12,7 +12,7 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route( 'admin.posts.update', $post ) }}" method="POST" >
+    <form action="{{ route( 'admin.posts.update', $post ) }}" method="POST" enctype="multipart/form-data">
 
         @csrf
         @method('PUT')
@@ -26,6 +26,11 @@
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{$post->description}}</textarea>
         </div>
+        
+        <div class="form-group mt-3">
+            <label for="input-image" class="form-label">Image</label>
+            <input type="file" id="input-image" name="image" class="form-control">
+        </div>
 
         <div class="form-group">
             <label for="type" class="form-label">Types</label>
@@ -36,6 +41,8 @@
                 @endforeach
             </select>
         </div>
+
+        
 
         <div class="form-group mt-3">
             @foreach($technologies as $elem)
